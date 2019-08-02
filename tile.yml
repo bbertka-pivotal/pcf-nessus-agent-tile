@@ -1,0 +1,67 @@
+---
+name: nessus-agent
+label: 'Nessus Agent'
+description: 'Nessus Agent BOSH Add-on'
+icon_file: resources/nessus.png
+
+properties:
+ - name: author
+   type: string
+   label: Author
+   value: 'bbertka@pivotal.io'
+
+rank: 1
+service_broker: false # Default value
+
+stemcell_criteria:
+  os: xenial 97
+  version: latest
+
+release:
+  - name: os-conf
+    file: os-conf
+    version: latest
+  - name: nessus-agent
+    version: latest
+
+forms:
+- name: nessus-form
+  label: Nessus Config
+  description: Custom Properties for Nessus
+  properties:
+  - name: key
+    type: string
+    label: Nessus License Key
+    default: 'ABCDXXX'
+    description: Nessus License Key
+  - name: server
+    type: string
+    label: Nessus Server
+    default: 'cloud.nessus.org'
+    description: Nessus Server
+  - name: port
+    type: string
+    label: Nessus Port
+    default: '443'
+    description: Nessus Port
+
+packages:
+- name: nessus-agent
+  type: bosh-release
+  path: resources/nessus-agent-v1.tgz
+  properties:
+    key: (( .properties.nessus_form.key.value ))
+    server: (( .properties.server.value ))
+    port: (( .properties.port.value ))
+
+runtime_configs:
+  - name: nessus-runtime-config
+    runtime_config:
+      releases:
+      - name: os-conf
+        version: 15
+      addons:
+      - name: nessus-agent
+        jobs:
+        - name: nessus-agent
+          release: nessus-agent
