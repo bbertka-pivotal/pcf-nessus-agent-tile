@@ -12,7 +12,7 @@ Download and intall the PCF tile generator
 
 From this directory run 'tile build'
 
-Upload to Ops Manager
+Upload to Ops Manager the Pivotal artifact from /product folder (demo version already in this repo)
 
 image:images/img1.png[]
 
