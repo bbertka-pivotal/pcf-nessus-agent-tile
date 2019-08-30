@@ -6,6 +6,14 @@ https://github.com/skibum55/cg-nessus-agent-boshrelease[18F Nessus Agent GitHub]
 
 https://docs.pivotal.io/tiledev/2-6/tile-generator.html[Pivotal Tile Generator]
 
+To Build:
+
+Download and intall the PCF tile generator
+
+From this directory run 'tile build'
+
+Upload to Ops Manager
+
 image:images/img1.png[]
 
 image:images/img2.png[]
